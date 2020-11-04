@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grupoess.grupoessv05.R
 import com.grupoess.grupoessv05.model.IntroSlide
 
-class IntroSliderAdapter (private  val introSlides: List<IntroSlide>):
-    RecyclerView.Adapter<IntroSliderAdapter.IntroSlideViewHolder>(){
+class IntroSliderAdapter (private val introSlides: List<IntroSlide>):
+       RecyclerView.Adapter<IntroSliderAdapter.IntroSlideViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntroSlideViewHolder {

@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/BarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
-
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -22,7 +22,28 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/sliderHomePager2"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@id/BarLayout"
+        android:layout_marginBottom="12dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@+id/indicatorsContainer"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_below="@+id/sliderHomePager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/content_main" />
+
+    </LinearLayout>
+
+
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/grupoFab"
@@ -40,30 +61,38 @@
         >
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/idFabCarrito"
+            android:id="@+id/idFabInstagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/shopping_cart"
+            app:fab_icon="@drawable/instagram"
             app:fab_title="Carrito"
             app:fab_size="mini" />
-<!--
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/idFabHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/home"
-            app:fab_title="Confirmar"
-            app:fab_size="mini" />
--->
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/idFabMiPerfil"
+            android:id="@+id/idFabFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/perfil"
+            app:fab_icon="@drawable/facebook"
+            app:fab_title="Confirmar"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idFabYoutube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimaryDark"
+            app:fab_icon="@drawable/youtube"
+            app:fab_title="xxxxxxxxx"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idFabTwitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimaryDark"
+            app:fab_icon="@drawable/twitter"
             app:fab_title="xxxxxxxxx"
             app:fab_size="mini" />
 

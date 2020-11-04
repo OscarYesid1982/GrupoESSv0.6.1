@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.grupoess.grupoessv05.adapters.IntroSliderAdapter
 import com.grupoess.grupoessv05.model.IntroSlide
 import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.android.synthetic.main.login.*
+
 
 class SplashActivity : AppCompatActivity() {
 
@@ -58,14 +58,13 @@ class SplashActivity : AppCompatActivity() {
 
         }
         )
-
-
         //escucha el boton de registrarse
         textSkipIntro.setOnClickListener {
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
         }
     }
+
     private fun setupIndicators() {
         val indicators = arrayOfNulls<ImageView>(introSliderAdapter.itemCount)
         val layoutParams: LinearLayout.LayoutParams =
@@ -88,7 +87,6 @@ class SplashActivity : AppCompatActivity() {
             indicatorsContainer.addView(indicators[i])
         }
     }
-
     private fun setCurrentIndicator(index: Int){
         val childCount = indicatorsContainer.childCount
         for (i in 0 until  childCount){
@@ -104,8 +102,4 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
-
-
-
-
 }

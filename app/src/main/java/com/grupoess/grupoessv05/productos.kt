@@ -1,6 +1,7 @@
 package com.grupoess.grupoessv05
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -33,22 +34,13 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
 //        setSupportActionBar(findViewById(R.id.toolbar))
 
         //Acciones Grupo Fab
-        idFabCarrito.setOnClickListener {
-            val i = Intent(this, carrito::class.java)
-            startActivity(i)
+
+        idFabYoutube.setOnClickListener {
+           // val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://codejavu.blogspot.com/")
+            //startActivity(i)
         }
 
-        idFabMiPerfil.setOnClickListener{
-            //Toast.makeText(this, "Mensaje Fab Perfil", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, login::class.java)
-            startActivity(i)
-        }
 
-        idFabMiPerfil.setOnClickListener{
-            //Toast.makeText(this, "Mensaje Fab Perfil", Toast.LENGTH_SHORT).show()
-            val i = Intent(this, MainActivity::class.java)
-            startActivity(i)
-        }
 
         var context = this;
         var arrayList_2:ArrayList<Productos_object> = ArrayList()

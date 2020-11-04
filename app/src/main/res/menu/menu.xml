@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <item
+            android:id="@+id/Search"
+            android:icon="@drawable/ic_search"
+            android:title="Buscar"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/Car"
+            android:icon="@drawable/ic_shopping_cart"
+            android:title="Mis Compras"
+            android:visible="true"
+            app:showAsAction="always" />
+
+        <item
+                android:id="@+id/detail"
+                android:title="detalles"
+                >
+
+                <menu>
+                        <item
+                            android:id="@+id/MyProfile"
+                            android:icon="@drawable/ic_perfil"
+                            android:title="Mi Cuenta"
+                            android:visible="true"
+                            app:showAsAction="always" />
+                        <item
+                            android:id="@+id/About"
+                            android:icon="@drawable/ic_about"
+                            android:title="Nosotros"
+                            android:visible="true"
+                            app:showAsAction="always" />
+                </menu>
+
+
+        </item>
+</menu>
