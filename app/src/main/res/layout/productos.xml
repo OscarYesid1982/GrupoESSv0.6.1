@@ -31,30 +31,43 @@
         >
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/idFabCarrito"
+            android:id="@+id/idFabGrupoEss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/shopping_cart"
-            app:fab_title="Carrito"
+            app:fab_icon="@drawable/logogrupo"
             app:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/idFabHome"
+            android:id="@+id/idFabInstagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/home"
-            app:fab_title="Confirmar"
+            app:fab_icon="@drawable/instagram"
             app:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/idFabMiPerfil"
+            android:id="@+id/idFabFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
-            app:fab_icon="@drawable/perfil"
-            app:fab_title="xxxxxxxxx"
+            app:fab_icon="@drawable/facebook"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idFabYoutube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimaryDark"
+            app:fab_icon="@drawable/youtube"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idFabTwitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimaryDark"
+            app:fab_icon="@drawable/twitter"
             app:fab_size="mini" />
 
 

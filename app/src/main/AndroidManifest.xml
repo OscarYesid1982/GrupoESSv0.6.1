@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".productos"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".carrito"
             android:theme="@style/AppTheme.NoActionBar">

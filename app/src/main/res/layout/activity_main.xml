@@ -61,12 +61,19 @@
         >
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idFabGrupoEss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/colorPrimaryDark"
+            app:fab_icon="@drawable/logogrupo"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/idFabInstagram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
             app:fab_icon="@drawable/instagram"
-            app:fab_title="Carrito"
             app:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -75,7 +82,6 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
             app:fab_icon="@drawable/facebook"
-            app:fab_title="Confirmar"
             app:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -84,7 +90,6 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
             app:fab_icon="@drawable/youtube"
-            app:fab_title="xxxxxxxxx"
             app:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -93,7 +98,6 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/colorPrimaryDark"
             app:fab_icon="@drawable/twitter"
-            app:fab_title="xxxxxxxxx"
             app:fab_size="mini" />
 
 

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.GridView
@@ -33,13 +35,35 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.productos)
 //        setSupportActionBar(findViewById(R.id.toolbar))
 
-        //Acciones Grupo Fab
-
+      //Acciones Grupo Fab
         idFabYoutube.setOnClickListener {
-           // val i = Intent(Intent.ACTION_VIEW, Uri.parse("http://codejavu.blogspot.com/")
-            //startActivity(i)
+            val uri: Uri = Uri.parse("https://www.youtube.com/channel/UCm7n7YmVPjRRgM51IUJIuRg")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+        idFabFacebook.setOnClickListener {
+            val uri: Uri = Uri.parse("https://www.facebook.com/GrupoESSCol/")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
         }
 
+        idFabInstagram.setOnClickListener {
+            val uri: Uri = Uri.parse("https://www.instagram.com/grupoess/")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+
+        idFabTwitter.setOnClickListener {
+            val uri: Uri = Uri.parse("https://twitter.com/ess_grupo")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+
+        idFabGrupoEss.setOnClickListener {
+            val uri: Uri = Uri.parse("https://grupoess.com/tienda/")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
 
 
         var context = this;
@@ -89,6 +113,36 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
                 Log.w("Alerta", "Failed to read value.", error.toException())
             }
         });
+    }
+
+    //Opciones Menu
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.Search -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.Car -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.MyProfile -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.About -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

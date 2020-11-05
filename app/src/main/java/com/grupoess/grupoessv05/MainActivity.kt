@@ -81,12 +81,34 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
        //Acciones Grupo Fab
         idFabYoutube.setOnClickListener {
-            val uri: Uri = Uri.parse("https://www.youtube.com/user/CristianDavidHenao?sub_confirmation=1")
+            val uri: Uri = Uri.parse("https://www.youtube.com/channel/UCm7n7YmVPjRRgM51IUJIuRg")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
-
-
         }
+       idFabFacebook.setOnClickListener {
+           val uri: Uri = Uri.parse("https://www.facebook.com/GrupoESSCol/")
+           val intent = Intent(Intent.ACTION_VIEW, uri)
+           startActivity(intent)
+       }
+
+       idFabInstagram.setOnClickListener {
+           val uri: Uri = Uri.parse("https://www.instagram.com/grupoess/")
+           val intent = Intent(Intent.ACTION_VIEW, uri)
+           startActivity(intent)
+       }
+
+       idFabTwitter.setOnClickListener {
+           val uri: Uri = Uri.parse("https://twitter.com/ess_grupo")
+           val intent = Intent(Intent.ACTION_VIEW, uri)
+           startActivity(intent)
+       }
+
+       idFabGrupoEss.setOnClickListener {
+           val uri: Uri = Uri.parse("https://grupoess.com/tienda/")
+           val intent = Intent(Intent.ACTION_VIEW, uri)
+           startActivity(intent)
+       }
+
 
 
 
@@ -134,7 +156,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             }
         });
 
-    }
+   }
     //Opciones Menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 

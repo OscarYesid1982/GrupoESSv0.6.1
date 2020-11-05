@@ -3,6 +3,8 @@ package com.grupoess.grupoessv05
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -60,6 +62,35 @@ class seleccion_producto : AppCompatActivity() {
 
             }
         }
+    }
+    //Opciones Menu
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.Search -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.Car -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.MyProfile -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.About -> {
+                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
