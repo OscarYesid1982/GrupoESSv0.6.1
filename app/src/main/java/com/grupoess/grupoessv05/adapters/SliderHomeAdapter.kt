@@ -16,7 +16,7 @@ class SliderHomeAdapter (private val introSlides: List<IntroSlide>):
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IntroSlideViewHolder {
             return  IntroSlideViewHolder(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.sliderhome, parent, false)
+                    R.layout.slider_item_home, parent, false)
             )
         }
 
@@ -30,9 +30,9 @@ class SliderHomeAdapter (private val introSlides: List<IntroSlide>):
 
         inner class IntroSlideViewHolder(view: View): RecyclerView.ViewHolder(view){
 
-            private  val textTittle = view.findViewById<TextView>(R.id.textTittleHome)
-            private  val textDescription = view.findViewById<TextView>(R.id.textDescriptionHome)
-            private  val imageIcon = view.findViewById<ImageView>(R.id.imageSlideIconHome)
+            private  val textTittle = view.findViewById<TextView>(R.id.textTittle)
+            private  val textDescription = view.findViewById<TextView>(R.id.textDescription)
+            private  val imageIcon = view.findViewById<ImageView>(R.id.imageSlideIcon)
 
             fun bind (introSlide: IntroSlide){
                 textTittle.text = introSlide.tittle

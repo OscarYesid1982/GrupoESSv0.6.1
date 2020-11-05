@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -23,6 +24,7 @@ import com.grupoess.grupoessv05.model.IntroSlide
 import com.grupoess.grupoessv05.variables.Seleccion
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.sliderhome.*
 
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private var languageAdapters: LanguageAdaptersCategorias? = null
 
 
-    private val sliderHomePager = SliderHomeAdapter(
+    private val introSliderAdapter = SliderHomeAdapter(
         listOf(
             IntroSlide(
                 "Imagen Slider 1",
@@ -62,22 +64,23 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-/*  Config Slider Home
-       sliderHomePager2.adapter = sliderHomePager
+// Config Slider Home
+
+       introSliderViewPager2.adapter = introSliderAdapter
        setupIndicators()
-       setCurrentIndicator2(0)
-       sliderHomePager2.registerOnPageChangeCallback(object:
+       setCurrentIndicator(0)
+       introSliderViewPager2.registerOnPageChangeCallback(object:
            ViewPager2.OnPageChangeCallback() {
 
            override fun onPageSelected(position: Int) {
                super.onPageSelected(position)
-               setCurrentIndicator2(position)
+               setCurrentIndicator(position)
            }
 
        }
        )
 
- */
+
 
        //Acciones Grupo Fab
         idFabYoutube.setOnClickListener {
@@ -205,7 +208,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     //Slider
 
     private fun setupIndicators() {
-        val indicators = arrayOfNulls<ImageView>(sliderHomePager.itemCount)
+        val indicators = arrayOfNulls<ImageView>(introSliderAdapter.itemCount)
         val layoutParams: LinearLayout.LayoutParams =
             LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -223,25 +226,21 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 )
                 this?.layoutParams = layoutParams
             }
-            indicatorsContainer.addView(indicators[i])
+            indicatorsContainer2.addView(indicators[i])
         }
     }
-    private fun setCurrentIndicator2(index: Int){
-        val childCount = indicatorsContainer.childCount
+    private fun setCurrentIndicator(index: Int){
+        val childCount = indicatorsContainer2.childCount
         for (i in 0 until  childCount){
-            val imageView = indicatorsContainer.get(i) as ImageView
+            val imageView = indicatorsContainer2.get(i) as ImageView
             if (i == index){
-                imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext, R.drawable.indicator_active
-                    )
-                )
+                imageView.setImageDrawable(ContextCompat.getDrawable(
+                    applicationContext, R.drawable.indicator_active
+                ))
             }else {
-                imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext, R.drawable.indicator_inactive
-                    )
-                )
+                imageView.setImageDrawable(ContextCompat.getDrawable(
+                    applicationContext, R.drawable.indicator_inactive
+                ))
             }
         }
     }
