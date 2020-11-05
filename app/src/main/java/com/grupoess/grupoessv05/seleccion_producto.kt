@@ -77,6 +77,10 @@ class seleccion_producto : AppCompatActivity() {
                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
                 return true
             }
+            R.id.Favorite -> {
+                Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
+                return true
+            }
             R.id.Car -> {
                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
                 return true

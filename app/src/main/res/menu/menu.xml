@@ -10,6 +10,12 @@
             app:showAsAction="always" />
 
         <item
+            android:id="@+id/Favorite"
+            android:icon="@drawable/ic_favorite"
+            android:title="Buscar"
+            app:showAsAction="always" />
+
+        <item
             android:id="@+id/Car"
             android:icon="@drawable/ic_shopping_cart"
             android:title="Mis Compras"

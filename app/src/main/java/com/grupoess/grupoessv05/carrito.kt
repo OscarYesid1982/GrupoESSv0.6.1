@@ -30,7 +30,7 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.productos)
+        setContentView(R.layout.carrito_activity)
 
         var context = this;
         var arrayList_2:ArrayList<Productos_object> = ArrayList()
@@ -41,7 +41,7 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
             var context = this;
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("seleccion_producto/"+user.uid)
-            gridView = findViewById(R.id.grid_view_contet_main)
+            gridView = findViewById(R.id.grid_view_contet_main_carrito)
             arrayList = ArrayList()
 
             myRef.addValueEventListener(object : ValueEventListener {

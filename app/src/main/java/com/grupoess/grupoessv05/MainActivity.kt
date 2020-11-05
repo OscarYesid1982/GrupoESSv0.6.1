@@ -171,13 +171,17 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
                 return true
             }
-            R.id.Car -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+            R.id.Favorite -> {
+                Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
                 return true
             }
+            R.id.Car -> {
+                val intent = Intent(this, carrito::class.java)
+                startActivityForResult(intent, 0)
+            }
             R.id.MyProfile -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, registrarse::class.java)
+                startActivityForResult(intent, 0)
             }
             R.id.About -> {
                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
