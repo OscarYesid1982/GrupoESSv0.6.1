@@ -80,8 +80,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
        }
        )
 
-
-
        //Acciones Grupo Fab
         idFabYoutube.setOnClickListener {
             val uri: Uri = Uri.parse("https://www.youtube.com/channel/UCm7n7YmVPjRRgM51IUJIuRg")
@@ -187,8 +185,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 startActivityForResult(intent, 0)
             }
             R.id.About -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivityForResult(intent, 0)
             }
         }
         return super.onOptionsItemSelected(item)
