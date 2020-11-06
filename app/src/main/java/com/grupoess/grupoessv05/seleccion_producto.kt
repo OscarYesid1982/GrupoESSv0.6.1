@@ -7,6 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,6 +19,8 @@ import com.google.firebase.database.ValueEventListener
 import com.grupoess.grupoessv05.variables.Seleccion
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seleccion_producto.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class seleccion_producto : AppCompatActivity() {
@@ -22,27 +28,10 @@ class seleccion_producto : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seleccion_producto)
+
         var cat = Seleccion();
-        var context = this;
+        traer_producto_seleccionado(cat.get_id_producto())
 
-        val database2 = FirebaseDatabase.getInstance()
-        val myRef2 = database2.getReference("productos/"+cat.get_id_producto())
-
-        myRef2.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (array in dataSnapshot.children) {
-                    //se recorre el nombre y la categoria
-                    if(array.key == "Nombre"){seleccion_producto_id_titulo.text =array.value.toString()}
-                    if(array.key == "Descripcion"){seleccion_producto_id_descripcion.text = array.value.toString()}
-                    if(array.key == "Imagen"){Picasso.get().load(array.value.toString()).into(seleccion_producto_id_imagen);}
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("Alerta", "Failed to read value.", error.toException())
-            }
-        });
 
         seleccion_producto_id_compra.setOnClickListener {
             val user = FirebaseAuth.getInstance().currentUser
@@ -53,7 +42,7 @@ class seleccion_producto : AppCompatActivity() {
                 val myRef = database.getReference("seleccion_producto/"+user.uid+"/producto_"+cat.get_id_producto())
                 myRef.setValue(cat.get_id_producto())
 
-                val intent = Intent(context, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivityForResult(intent, 0)
             }else{
                 Toast.makeText(this, "Debe iniciar cesion primero", Toast.LENGTH_SHORT).show()
@@ -62,6 +51,7 @@ class seleccion_producto : AppCompatActivity() {
 
             }
         }
+
     }
     //Opciones Menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -97,4 +87,41 @@ class seleccion_producto : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun traer_producto_seleccionado(id: Int){
+        //se consulta el servicio
+        var queue = Volley.newRequestQueue(this)
+        var url = "https://kindrez.com:83/traer_producto_seleccion.php"
+        val postRequest: StringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener { response -> // response
+                //el texto que viene lo convertimos de string a json
+                covertir_json(response)
+            },
+            Response.ErrorListener { // error
+                Log.i("Alerta","Error al intentar cargar las variables contacte con el administrador")
+            }
+        ) {
+            override fun getParams(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["clave"] = "R3J1cG9Fc3M"
+                params["id"] = id.toString()
+                return params
+            }
+        }
+        queue.add(postRequest)
+    }
+
+    private fun covertir_json(response: String) {
+        val data_ini = JSONObject(response)
+        val data = JSONArray(data_ini["data"].toString())
+
+        for (i in 0 until data.length()) {
+            val data_product = JSONObject(data.getJSONObject(i).toString())
+
+            seleccion_producto_id_titulo.text = data_product["name"].toString()
+            seleccion_producto_id_descripcion.text = data_product["descripcion"].toString()
+            Picasso.get().load( data_product["imagen"].toString() ).into(seleccion_producto_id_imagen);
+        }
+
+    }
 }

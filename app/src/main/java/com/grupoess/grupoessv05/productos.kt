@@ -11,6 +11,10 @@ import android.widget.AdapterView
 import android.widget.GridView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,6 +26,8 @@ import com.grupoess.grupoessv05.variables.Seleccion
 import com.grupoess.grupoessv05.adapters.LanguageAdaptersProductos
 import com.grupoess.grupoessv05.seleccion_producto
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -65,54 +71,58 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
             startActivity(intent)
         }
 
+        //traer las productos
+        traer_productos()
 
-        var context = this;
-        var arrayList_2:ArrayList<Productos_object> = ArrayList()
-        //se declara la variable de firbases y se llama a categorias
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("productos")
-        //se trae la clase que guardo la seleccion de la categoria
+    }
+
+    private fun traer_productos(){
+        //se consulta el servicio
+        var queue = Volley.newRequestQueue(this)
+        var url = "https://kindrez.com:83/traer_productos.php"
+        val postRequest: StringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener { response -> // response
+                //el texto que viene lo convertimos de string a json
+                covertir_json(response)
+            },
+            Response.ErrorListener { // error
+                Log.i("Alerta","Error al intentar cargar las variables contacte con el administrador")
+            }
+        ) {
+            override fun getParams(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["clave"] = "R3J1cG9Fc3M"
+                return params
+            }
+        }
+        queue.add(postRequest)
+    }
+
+    private fun covertir_json(response: String) {
+        var data_arraylist:ArrayList<Productos_object> = ArrayList()
+        val data_ini = JSONObject(response)
+        val data = JSONArray(data_ini["data"].toString())
         var cat = Seleccion();
+        ;
 
+        for (i in 0 until data.length()) {
+            val data_product = JSONObject(data.getJSONObject(i).toString())
+            if(cat.get_id_categoria() == 83 && (data_product["id_wordpress"].toString().toInt() == 16171 || data_product["id_wordpress"].toString().toInt() == 15342 || data_product["id_wordpress"].toString().toInt() == 15352 || data_product["id_wordpress"].toString().toInt() == 15401 || data_product["id_wordpress"].toString().toInt() == 15413 || data_product["id_wordpress"].toString().toInt() == 16169 || data_product["id_wordpress"].toString().toInt() == 16171)){
+                data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(), data_product["id_categoria"].toString().toInt(), data_product["imagen"].toString(),data_product["name"].toString(),data_product["descripcion"].toString()))
+            }
+            if(cat.get_id_categoria() == 42 && (data_product["id_wordpress"].toString().toInt() == 15365 || data_product["id_wordpress"].toString().toInt() == 15365)){
+                data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(), data_product["id_categoria"].toString().toInt(), data_product["imagen"].toString(),data_product["name"].toString(),data_product["descripcion"].toString()))
+            }
+        }
 
+        //se toma el grid_view_contet_main
+        arrayList = data_arraylist;
         gridView = findViewById(R.id.grid_view_contet_main)
-        arrayList = ArrayList()
+        languageAdapters = LanguageAdaptersProductos(applicationContext, data_arraylist!!)
+        gridView?.adapter = languageAdapters
+        gridView?.onItemClickListener = this
 
-        //se llama el resultado de la consulta
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (array in dataSnapshot.children) {
-                    var icons = "";
-                    var name = "";
-                    var descripcion = "";
-                    var id= array.key.toString().toInt();
-                    var id_categoria = 0;
-
-                    //se recorre el nombre y la categoria
-                    for (categoria in array.children) {
-                        if(categoria.key == "Descripcion"){descripcion =  categoria.value.toString()}
-                        if(categoria.key == "Id_categoria"){id_categoria =  categoria.value.toString().toInt()}
-                        if(categoria.key == "Nombre"){name =  categoria.value.toString()}
-                        if(categoria.key == "Imagen"){icons =  categoria.value.toString()}
-                    }
-                    //se hace el filtro de la categoria seleccionada
-                    if(cat.get_id_categoria() == id_categoria){
-                        arrayList_2.add(Productos_object(id, id_categoria, icons, name, descripcion))
-                    }
-                }
-
-                //se llena el array list
-                arrayList = arrayList_2;
-                languageAdapters = LanguageAdaptersProductos(applicationContext, arrayList_2!!)
-                gridView?.adapter = languageAdapters
-                gridView?.onItemClickListener = context
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("Alerta", "Failed to read value.", error.toException())
-            }
-        });
     }
 
     //Opciones Menu

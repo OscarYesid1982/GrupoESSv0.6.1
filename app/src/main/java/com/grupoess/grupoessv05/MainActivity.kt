@@ -13,6 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -25,6 +29,8 @@ import com.grupoess.grupoessv05.variables.Seleccion
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.sliderhome.*
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -110,54 +116,52 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
            startActivity(intent)
        }
 
+       traer_categorias()
+   }
 
+    private fun traer_categorias(){
+        //se consulta el servicio
+        var queue = Volley.newRequestQueue(this)
+        var url = "https://kindrez.com:83/traer_categorias.php"
+        val postRequest: StringRequest = object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener { response -> // response
+                //el texto que viene lo convertimos de string a json
+                covertir_json(response)
+            },
+            Response.ErrorListener { // error
+                Log.i("Alerta","Error al intentar cargar las variables contacte con el administrador")
+            }
+        ) {
+            override fun getParams(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["clave"] = "R3J1cG9Fc3M"
+                return params
+            }
+        }
+        queue.add(postRequest)
+    }
+    private fun covertir_json(response: String) {
+        var data_arraylist:ArrayList<Categorias_object> = ArrayList()
+        val data_ini = JSONObject(response)
+        val data = JSONArray(data_ini["data"].toString())
 
-
-       //Carga de articulos
-
-        var context = this;
-        var arrayList_2:ArrayList<Categorias_object> = ArrayList()
-        //se declara la variable de firbases y se llama a categorias
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("categorias")
+        for (i in 0 until data.length()) {
+            val data_categpry = JSONObject(data.getJSONObject(i).toString())
+            if(data_categpry["parent"].toString() == "38"){
+                data_arraylist.add(Categorias_object( data_categpry["img"].toString(),  data_categpry["name"].toString(), data_categpry["id_wordpress"].toString().toInt()))
+            }
+        }
 
         //se toma el grid_view_contet_main
+        arrayList = data_arraylist;
         gridView = findViewById(R.id.grid_view_contet_main)
+        languageAdapters = LanguageAdaptersCategorias(applicationContext, data_arraylist!!)
+        gridView?.adapter = languageAdapters
+        gridView?.onItemClickListener = this
 
-        //se llama el resultado de la consulta
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (array in dataSnapshot.children) {
-                    var id = array.key.toString().toInt();
-                    var Nombre = "";
-                    var icon = "";
-                    //se recorre el nombre y la categoria
-                    for (categoria in array.children) {
-                        if (categoria.key == "Nombre") {
-                            Nombre = categoria.value.toString()
-                        }
-                        if (categoria.key == "Imagen") {
-                            icon = categoria.value.toString()
-                        }
-                    }
-                    //se guarda el resultado en el array a publicar
-                    arrayList_2.add(Categorias_object(icon, Nombre, id))
-                }
+    }
 
-                //se llena el array list
-                arrayList = arrayList_2;
-                languageAdapters = LanguageAdaptersCategorias(applicationContext, arrayList_2!!)
-                gridView?.adapter = languageAdapters
-                gridView?.onItemClickListener = context
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("Alerta", "Failed to read value.", error.toException())
-            }
-        });
-
-   }
     //Opciones Menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
