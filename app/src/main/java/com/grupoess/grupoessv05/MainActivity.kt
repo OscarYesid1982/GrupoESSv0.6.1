@@ -26,6 +26,7 @@ import com.grupoess.grupoessv05.adapters.SliderHomeAdapter
 import com.grupoess.grupoessv05.model.Categorias_object
 import com.grupoess.grupoessv05.model.IntroSlide
 import com.grupoess.grupoessv05.variables.Seleccion
+import com.grupoess.grupoessv05.variables.user
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.sliderhome.*
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private var arrayList:ArrayList<Categorias_object> ? = null
     private var gridView:GridView ? = null
     private var languageAdapters: LanguageAdaptersCategorias? = null
-
 
     private val introSliderAdapter = SliderHomeAdapter(
         listOf(
@@ -69,6 +69,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+       var nameUsuario = user()
+       nameUsuario.get_nombre()
+       textUsuario.text = nameUsuario.get_nombre()
 
 // Config Slider Home
 

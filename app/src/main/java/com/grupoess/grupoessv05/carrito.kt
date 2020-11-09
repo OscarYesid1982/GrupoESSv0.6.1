@@ -12,20 +12,11 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.grupoess.grupoessv05.R
+import com.grupoess.grupoessv05.adapters.AdaptersCarrito
 import com.grupoess.grupoessv05.model.Productos_object
 import com.grupoess.grupoessv05.variables.Seleccion
 import com.grupoess.grupoessv05.adapters.LanguageAdaptersProductos
-import com.grupoess.grupoessv05.model.Categorias_object
-import com.grupoess.grupoessv05.seleccion_producto
 import com.grupoess.grupoessv05.variables.user
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.seleccion_producto.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -33,7 +24,7 @@ import org.json.JSONObject
 class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
     private var arrayList:ArrayList<Productos_object> ? = null
     private var gridView:GridView ? = null
-    private var languageAdapters: LanguageAdaptersProductos? = null
+    private var languageAdapters: AdaptersCarrito? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +80,7 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
         //se toma el grid_view_contet_main
         arrayList = data_arraylist;
         gridView = findViewById(R.id.grid_view_contet_main_carrito)
-        languageAdapters = LanguageAdaptersProductos(applicationContext, data_arraylist!!)
+        languageAdapters = AdaptersCarrito(applicationContext, data_arraylist!!)
         gridView?.adapter = languageAdapters
         gridView?.onItemClickListener = this
     }

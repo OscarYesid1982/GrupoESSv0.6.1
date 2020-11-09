@@ -40,7 +40,6 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.productos)
 //        setSupportActionBar(findViewById(R.id.toolbar))
-
       //Acciones Grupo Fab
         idFabYoutube.setOnClickListener {
             val uri: Uri = Uri.parse("https://www.youtube.com/channel/UCm7n7YmVPjRRgM51IUJIuRg")
@@ -52,28 +51,23 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-
         idFabInstagram.setOnClickListener {
             val uri: Uri = Uri.parse("https://www.instagram.com/grupoess/")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-
         idFabTwitter.setOnClickListener {
             val uri: Uri = Uri.parse("https://twitter.com/ess_grupo")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-
         idFabGrupoEss.setOnClickListener {
             val uri: Uri = Uri.parse("https://grupoess.com/tienda/")
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
-
         //traer las productos
         traer_productos()
-
     }
 
     private fun traer_productos(){
@@ -118,7 +112,7 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
 
         //se toma el grid_view_contet_main
         arrayList = data_arraylist;
-        gridView = findViewById(R.id.grid_view_contet_main)
+        gridView = findViewById(R.id.grid_view_contet_main_Productos)
         languageAdapters = LanguageAdaptersProductos(applicationContext, data_arraylist!!)
         gridView?.adapter = languageAdapters
         gridView?.onItemClickListener = this

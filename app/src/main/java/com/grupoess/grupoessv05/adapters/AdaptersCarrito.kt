@@ -10,7 +10,7 @@ import com.grupoess.grupoessv05.R
 import com.grupoess.grupoessv05.model.Productos_object
 import com.squareup.picasso.Picasso
 
-class LanguageAdaptersProductos(var context: Context, var arrayList: ArrayList<Productos_object>):BaseAdapter() {
+class AdaptersCarrito(var context: Context, var arrayList: ArrayList<Productos_object>):BaseAdapter() {
 
     override fun getItem(position: Int): Any {
         return arrayList.get(position)
@@ -27,8 +27,8 @@ class LanguageAdaptersProductos(var context: Context, var arrayList: ArrayList<P
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
 
-        var view: View = View.inflate(context, R.layout.card_view_productos, null)
-        var icons: ImageView = view.findViewById(R.id.Imageview_Producto)
+        var view: View = View.inflate(context, R.layout.card_view_carrito, null)
+        //var icons: ImageView = view.findViewById(R.id.Imageview_Producto)
         var names: TextView = view.findViewById(R.id.NombreProducto)
         var descrip: TextView = view.findViewById(R.id.descripcionCorta)
 
@@ -36,10 +36,14 @@ class LanguageAdaptersProductos(var context: Context, var arrayList: ArrayList<P
 
         var listItem: Productos_object = arrayList.get(position)
 
-        Picasso.get().load(listItem.icons).into(icons)
+        //Picasso.get().load(listItem.icons).into(icons)
         descrip.text = listItem.descripcion
         names.text = listItem.name
-        //precio.text="$200"
+
+        //cantidades seleccionadas
+        //Cargar el precio total= cantidades seleccionadas por el usuario
+
+
 
         return view
     }
