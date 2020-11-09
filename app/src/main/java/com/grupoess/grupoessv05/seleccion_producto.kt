@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.grupoess.grupoessv05.variables.Seleccion
+import com.grupoess.grupoessv05.variables.user
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seleccion_producto.*
 import org.json.JSONArray
@@ -34,24 +35,52 @@ class seleccion_producto : AppCompatActivity() {
 
 
         seleccion_producto_id_compra.setOnClickListener {
-            val user = FirebaseAuth.getInstance().currentUser
-            if (user != null) {
-                Toast.makeText(this, "Producto agregado al carrito", Toast.LENGTH_SHORT).show()
+            //se lee el usuario en cache
 
-                val database = FirebaseDatabase.getInstance()
-                val myRef = database.getReference("seleccion_producto/"+user.uid+"/producto_"+cat.get_id_producto())
-                myRef.setValue(cat.get_id_producto())
+            var user_data = user();
 
-                val intent = Intent(this, MainActivity::class.java)
+            if(user_data.get_id() == "null"){
+                val intent = Intent(this, login::class.java)
                 startActivityForResult(intent, 0)
-            }else{
-                Toast.makeText(this, "Debe iniciar cesion primero", Toast.LENGTH_SHORT).show()
-                val i = Intent(this, login::class.java)
-                startActivity(i)
-
+            }
+            else{
+                var cat = Seleccion();
+                //se consulta el servicio
+                var queue = Volley.newRequestQueue(this)
+                var url = "https://kindrez.com:82/GrupoEss/registrar_seleccion_usuario.php"
+                val postRequest: StringRequest = object : StringRequest(
+                    Request.Method.POST, url,
+                    Response.Listener { response -> // response
+                        //el texto que viene lo convertimos de string a json
+                        comprobar_respuesta(response);
+                    },
+                    Response.ErrorListener { // error
+                        Log.i("Alerta","Error al intentar cargar las variables contacte con el administrador")
+                    }
+                ) {
+                    override fun getParams(): Map<String, String> {
+                        val params: MutableMap<String, String> = HashMap()
+                        params["clave"] = "R3J1cG9Fc3M"
+                        params["id_usuario"] = user_data.get_id()
+                        params["id_producto"] = cat.get_id_producto().toString()
+                        params["cantidad"] = "10"
+                        return params
+                    }
+                }
+                queue.add(postRequest)
             }
         }
 
+
+    }
+    private fun comprobar_respuesta(response: String?) {
+        val respuesta = JSONObject(response);
+
+        if(respuesta["mensaje"].toString() == "1"){
+            Toast.makeText(this, "Producto eliminado del carrito", Toast.LENGTH_SHORT).show()
+        }else if(respuesta["mensaje"].toString() == "0"){
+            Toast.makeText(this, "Producto agregado al carrito", Toast.LENGTH_SHORT).show()
+        }
     }
     //Opciones Menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

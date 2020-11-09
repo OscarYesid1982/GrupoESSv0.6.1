@@ -21,7 +21,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
+    <!--
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/sliderHomePager2"
         android:layout_width="match_parent"
@@ -31,10 +31,77 @@
         android:overScrollMode="never"
         app:layout_constraintBottom_toTopOf="@+id/indicatorsContainer"
         app:layout_constraintTop_toTopOf="parent"/>
+   -->
+
+    <LinearLayout
+        android:id="@+id/textDatosUsuario"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/BarLayout"
+        android:orientation="vertical"
+        android:layout_height="180dp">
+
+        <TextView
+            android:id="@+id/tituloUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:text="Datos Usuario"/>
+
+    <LinearLayout
+        android:id="@+id/textDatosUsuario2"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/textDatosUsuario"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="30sp"
+                android:text="Usuario"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:textSize="30sp"
+                android:text="Telefono"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/textDatosUsuario3"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/textDatosUsuario2"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="30sp"
+                android:text="Dirección:"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:textSize="30sp"
+                android:text="Dirección"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear2"
-        android:layout_below="@+id/sliderHomePager2"
+        android:layout_below="@+id/textDatosUsuario"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -42,8 +109,6 @@
         <include layout="@layout/content_main_carrito" />
 
     </LinearLayout>
-
-
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/grupoFab"

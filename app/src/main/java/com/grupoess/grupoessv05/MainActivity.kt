@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
            val intent = Intent(Intent.ACTION_VIEW, uri)
            startActivity(intent)
        }
-
+       //se traen las caegorias
        traer_categorias()
    }
 
