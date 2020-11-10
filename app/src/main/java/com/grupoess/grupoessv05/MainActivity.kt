@@ -26,6 +26,7 @@ import com.grupoess.grupoessv05.adapters.SliderHomeAdapter
 import com.grupoess.grupoessv05.model.Categorias_object
 import com.grupoess.grupoessv05.model.IntroSlide
 import com.grupoess.grupoessv05.variables.Seleccion
+import com.grupoess.grupoessv05.variables.convertir_utd8
 import com.grupoess.grupoessv05.variables.user
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -40,55 +41,17 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     private var gridView:GridView ? = null
     private var languageAdapters: LanguageAdaptersCategorias? = null
 
-    private val introSliderAdapter = SliderHomeAdapter(
-        listOf(
-            IntroSlide(
-                "Imagen Slider 1",
-                "Descripción de la primera imagen como Slider",
-                R.drawable.slider1
-            ),
-            IntroSlide(
-                "Imagen Slider 2",
-                "Descripción de la segunda imagen como Slider",
-                R.drawable.slider2
-            ),
-            IntroSlide(
-                "Imagen Slider 3",
-                "Descripción de la tercera imagen como Slider",
-                R.drawable.slider3
-            ),
-            IntroSlide(
-                "Imagen Slider 4",
-                "Descripción de la cuarta imagen como Slider",
-                R.drawable.slider4
-            )
-        )
-    )
 
-   override fun onCreate(savedInstanceState: Bundle?) {
+
+      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+          traer_slider()
 
        var nameUsuario = user()
        nameUsuario.get_nombre()
        textUsuario.text = nameUsuario.get_nombre()
-
-// Config Slider Home
-
-       introSliderViewPager2.adapter = introSliderAdapter
-       setupIndicators()
-       setCurrentIndicator(0)
-       introSliderViewPager2.registerOnPageChangeCallback(object:
-           ViewPager2.OnPageChangeCallback() {
-
-           override fun onPageSelected(position: Int) {
-               super.onPageSelected(position)
-               setCurrentIndicator(position)
-           }
-
-       }
-       )
 
        //Acciones Grupo Fab
         idFabYoutube.setOnClickListener {
@@ -127,8 +90,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         //se consulta el servicio
         var queue = Volley.newRequestQueue(this)
         var url = "https://kindrez.com:83/traer_categorias.php"
-        val postRequest: StringRequest = object : StringRequest(
-            Request.Method.POST, url,
+        val postRequest: StringRequest = object : StringRequest(Request.Method.POST, url,
             Response.Listener { response -> // response
                 //el texto que viene lo convertimos de string a json
                 covertir_json(response)
@@ -145,15 +107,17 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
         queue.add(postRequest)
     }
+
     private fun covertir_json(response: String) {
         var data_arraylist:ArrayList<Categorias_object> = ArrayList()
         val data_ini = JSONObject(response)
         val data = JSONArray(data_ini["data"].toString())
+        var data_utf8 = convertir_utd8();
 
         for (i in 0 until data.length()) {
             val data_categpry = JSONObject(data.getJSONObject(i).toString())
             if(data_categpry["parent"].toString() == "38"){
-                data_arraylist.add(Categorias_object( data_categpry["img"].toString(),  data_categpry["name"].toString(), data_categpry["id_wordpress"].toString().toInt()))
+                data_arraylist.add(Categorias_object( data_categpry["img"].toString(),  data_utf8.get_text(data_categpry["name"].toString()), data_categpry["id_wordpress"].toString().toInt()))
             }
         }
 
@@ -210,9 +174,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         val intent = Intent(this, productos::class.java)
         startActivityForResult(intent, 0)
     }
-
+/*
     //Slider
-
     private fun setupIndicators() {
         val indicators = arrayOfNulls<ImageView>(introSliderAdapter.itemCount)
         val layoutParams: LinearLayout.LayoutParams =
@@ -250,6 +213,88 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             }
         }
     }
+
+ */
+
+    private fun traer_slider(){
+        //se consulta el servicio
+        var queue = Volley.newRequestQueue(this)
+        var url = "https://kindrez.com:83/traer_slider.php"
+        val postRequest: StringRequest = object : StringRequest(Request.Method.POST, url,
+            Response.Listener { response -> // response
+                //el texto que viene lo convertimos de string a json
+                covertir_jsonSlider(response)
+            },
+            Response.ErrorListener { // error
+                Log.i("Alerta","Error al intentar cargar las variables contacte con el administrador")
+            }
+        ) {
+            override fun getParams(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["clave"] = "R3J1cG9Fc3M"
+                return params
+            }
+        }
+        queue.add(postRequest)
+    }
+
+    private fun covertir_jsonSlider(response: String?) {
+
+        val data_ini = JSONObject(response)
+        val data = JSONArray(data_ini["data"].toString())
+        var data_utf8 = convertir_utd8();
+
+        val data_categpry = JSONObject(data.getJSONObject(0).toString())
+        Log.i("error",data_categpry.toString())
+ /*       val introSliderAdapter = SliderHomeAdapter(
+            listOf(
+                IntroSlide(
+                    "Imagen Slider 1",
+                    "Descripción de la primera imagen como Slider",
+                    data_categpry["imagen"].toString()
+                ),
+                IntroSlide(
+                    "Imagen Slider 2",
+                    "Descripción de la primera imagen como Slider",
+                    data_categpry["imagen"].toString()
+                ),
+                IntroSlide(
+                    "Imagen Slider 3",
+                    "Descripción de la primera imagen como Slider",
+                    data_categpry["imagen"].toString()
+                ),
+                IntroSlide(
+                    "Imagen Slider 4",
+                    "Descripción de la cuarta imagen como Slider",
+                    data_categpry["imagen"].toString()
+                )
+            )
+
+        )
+
+
+
+
+
+        // Config Slider Home
+        introSliderViewPager2.adapter = introSliderAdapter
+       // setupIndicators()
+       // setCurrentIndicator(0)
+        introSliderViewPager2.registerOnPageChangeCallback(object:
+            ViewPager2.OnPageChangeCallback() {
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+             //   setCurrentIndicator(position)
+            }
+
+        }
+        )
+
+  */
+
+    }
+
 
 
 }

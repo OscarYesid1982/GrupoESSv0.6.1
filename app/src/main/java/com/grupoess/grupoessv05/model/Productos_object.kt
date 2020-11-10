@@ -6,12 +6,14 @@ class Productos_object {
     var descripcion: String ? = null
     var id: Int ? = 0
     var id_categoria: Int ? = 0
+    var precio: Int ? = 0
 
-    constructor(id: Int?, id_categoria: Int?, icons: String?, name: String?, descripcion: String?) {
+    constructor(id: Int?, id_categoria: Int?, icons: String?, name: String?, descripcion: String?, precio: Int?) {
         this.id = id
         this.icons = icons
         this.name = name
         this.descripcion = descripcion
         this.id_categoria = id_categoria
+        this.precio = precio
     }
 }

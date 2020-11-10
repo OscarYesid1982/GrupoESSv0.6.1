@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <GridView
+0    <GridView
         android:id="@+id/grid_view_contet_main_carrito"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="150dp"
+        android:columnWidth="250dp"
         android:horizontalSpacing="15dp"
         android:padding="6dp"
         android:numColumns="auto_fit"

@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/BarLayout"
         android:orientation="vertical"
-        android:layout_height="180dp">
+        android:layout_height="150dp">
 
         <TextView
             android:id="@+id/tituloUsuario"
@@ -55,20 +55,29 @@
         android:layout_below="@+id/textDatosUsuario"
         android:orientation="horizontal"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="5dp">
 
             <TextView
+                android:id="@+id/textUsuarioCarrito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
+                android:text="Usuario"/>
+            <TextView
+                android:id="@+id/textApellidoUsuarioCarrito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
                 android:text="Usuario"/>
 
             <TextView
+                android:id="@+id/textTelefonoCarrito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:text="Telefono"/>
 
         </LinearLayout>
@@ -79,20 +88,21 @@
             android:layout_below="@+id/textDatosUsuario2"
             android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:text="Dirección:"/>
 
             <TextView
+                android:id="@+id/textDireccionCarrito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:text="Dirección"/>
 
         </LinearLayout>
@@ -106,9 +116,41 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/linear4"
+        android:layout_below="@+id/textDatosUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/textTotalCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:text="Total Compra: "/>
+        <TextView
+            android:id="@+id/textCompraCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="20sp"
+            android:text="$000.000 "/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear3"
+        android:layout_below="@+id/textDatosUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
         <include layout="@layout/content_main_carrito" />
 
     </LinearLayout>
+
+    </LinearLayout>
+
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/grupoFab"

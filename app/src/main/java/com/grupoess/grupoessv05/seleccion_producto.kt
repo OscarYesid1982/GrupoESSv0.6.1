@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.grupoess.grupoessv05.variables.Seleccion
+import com.grupoess.grupoessv05.variables.convertir_utd8
 import com.grupoess.grupoessv05.variables.user
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.seleccion_producto.*
@@ -143,12 +144,13 @@ class seleccion_producto : AppCompatActivity() {
     private fun covertir_json(response: String) {
         val data_ini = JSONObject(response)
         val data = JSONArray(data_ini["data"].toString())
+        var data_utf8 = convertir_utd8();
 
         for (i in 0 until data.length()) {
             val data_product = JSONObject(data.getJSONObject(i).toString())
 
-            seleccion_producto_id_titulo.text = data_product["name"].toString()
-            seleccion_producto_id_descripcion.text = data_product["descripcion"].toString()
+            seleccion_producto_id_titulo.text = data_utf8.get_text( data_product["name"].toString() )
+            seleccion_producto_id_descripcion.text = data_utf8.get_text( data_product["descripcion"].toString() )
             Picasso.get().load( data_product["imagen"].toString() ).into(seleccion_producto_id_imagen);
         }
 

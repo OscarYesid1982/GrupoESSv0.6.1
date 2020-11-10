@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.grupoess.grupoessv05.R
 import com.grupoess.grupoessv05.model.IntroSlide
+import com.squareup.picasso.Picasso
 
 class SliderHomeAdapter (private val introSlides: List<IntroSlide>):
         RecyclerView.Adapter<SliderHomeAdapter.IntroSlideViewHolder>(){
@@ -35,9 +36,10 @@ class SliderHomeAdapter (private val introSlides: List<IntroSlide>):
             private  val imageIcon = view.findViewById<ImageView>(R.id.imageSlideIcon)
 
             fun bind (introSlide: IntroSlide){
-                textTittle.text = introSlide.tittle
-                textDescription.text = introSlide.description
-                imageIcon.setImageResource(introSlide.icon)
+               // textTittle.text = introSlide.tittle
+               // textDescription.text = introSlide.description
+               // imageIcon.setImageResource(introSlide.icon)
+                Picasso.get().load(introSlide.icon).into(imageIcon)
             }
         }
 }

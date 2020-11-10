@@ -17,6 +17,8 @@ import com.grupoess.grupoessv05.model.Productos_object
 import com.grupoess.grupoessv05.variables.Seleccion
 import com.grupoess.grupoessv05.adapters.LanguageAdaptersProductos
 import com.grupoess.grupoessv05.variables.user
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.carrito_activity.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -29,6 +31,20 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.carrito_activity)
+
+        var nameUsuarioCarrito = user()
+        nameUsuarioCarrito.get_nombre()
+        textUsuarioCarrito.text = nameUsuarioCarrito.get_nombre()
+        var telefonoUsuarioCarrito = user()
+        telefonoUsuarioCarrito.get_telefono()
+        textTelefonoCarrito.text = telefonoUsuarioCarrito.get_telefono()
+        var direccionUsuarioCarrito = user()
+        direccionUsuarioCarrito.get_direccion()
+        textDireccionCarrito.text = direccionUsuarioCarrito.get_direccion()
+        var apellidoUsuarioCarrito = user()
+        apellidoUsuarioCarrito.get_apellido()
+        textApellidoUsuarioCarrito.text = apellidoUsuarioCarrito.get_apellido()
+
 
         var user_data = user();
         if(user_data.get_id() == "null"){
@@ -70,13 +86,15 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
         val data_ini = JSONObject(response)
         val data = JSONArray(data_ini["data"].toString())
         var cat = Seleccion();
+        var sumatoria = 0
 
         for (i in 0 until data.length()) {
             val data_product = JSONObject(data.getJSONObject(i).toString())
-            data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(), data_product["id_categoria"].toString().toInt(), data_product["imagen"].toString(),data_product["name"].toString(),data_product["descripcion"].toString()))
+            data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(), data_product["id_categoria"].toString().toInt(), data_product["imagen"].toString(),data_product["name"].toString(),data_product["descripcion"].toString(),data_product["precio"].toString().toInt()*data_product["cantidad"].toString().toInt()))
+            sumatoria += data_product["precio"].toString().toInt()*data_product["cantidad"].toString().toInt()
         }
+        textCompraCarrito.text = "$ " + sumatoria.toString() + " COP"
 
-        Log.i("prueba",data.toString())
         //se toma el grid_view_contet_main
         arrayList = data_arraylist;
         gridView = findViewById(R.id.grid_view_contet_main_carrito)

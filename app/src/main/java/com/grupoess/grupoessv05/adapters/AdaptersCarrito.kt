@@ -30,15 +30,16 @@ class AdaptersCarrito(var context: Context, var arrayList: ArrayList<Productos_o
         var view: View = View.inflate(context, R.layout.card_view_carrito, null)
         //var icons: ImageView = view.findViewById(R.id.Imageview_Producto)
         var names: TextView = view.findViewById(R.id.NombreProducto)
-        var descrip: TextView = view.findViewById(R.id.descripcionCorta)
 
-        //var precio: TextView = view.findViewById(R.id.PrecioVenta)
+        //var descrip: TextView = view.findViewById(R.id.descripcionCorta)
+        var precio: TextView = view.findViewById(R.id.valorTotal)
 
         var listItem: Productos_object = arrayList.get(position)
 
         //Picasso.get().load(listItem.icons).into(icons)
-        descrip.text = listItem.descripcion
+        //descrip.text = listItem.descripcion
         names.text = listItem.name
+        precio.text = "$" + listItem.precio.toString()
 
         //cantidades seleccionadas
         //Cargar el precio total= cantidades seleccionadas por el usuario

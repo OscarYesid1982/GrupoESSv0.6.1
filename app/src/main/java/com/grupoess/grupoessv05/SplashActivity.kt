@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 
 
 class SplashActivity : AppCompatActivity() {
-
+/*
     private val introSliderAdapter = IntroSliderAdapter(
         listOf(
             IntroSlide(
@@ -40,6 +40,8 @@ class SplashActivity : AppCompatActivity() {
             )
         )
     )
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,4 +104,6 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
+
+ */
 }
