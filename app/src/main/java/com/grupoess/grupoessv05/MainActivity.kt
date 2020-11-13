@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(findViewById(R.id.toolbar))
+        //setSupportActionBar(findViewById(R.id.toolbar))
           traer_slider()
 
        var nameUsuario = user()
@@ -140,14 +140,18 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.Search -> {
+           /* R.id.Search -> {
                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
                 return true
             }
+
+
             R.id.Favorite -> {
                 Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
                 return true
             }
+
+            */
             R.id.Car -> {
                 val intent = Intent(this, carrito::class.java)
                 startActivityForResult(intent, 0)
@@ -174,47 +178,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         val intent = Intent(this, productos::class.java)
         startActivityForResult(intent, 0)
     }
-/*
-    //Slider
-    private fun setupIndicators() {
-        val indicators = arrayOfNulls<ImageView>(introSliderAdapter.itemCount)
-        val layoutParams: LinearLayout.LayoutParams =
-            LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-        layoutParams.setMargins(0, 0, 0, 0)
-        for (i in indicators.indices) {
-            indicators[i] = ImageView(applicationContext)
-            indicators[i].apply {
-                this?.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext,
-                        R.drawable.indicator_inactive
-                    )
-                )
-                this?.layoutParams = layoutParams
-            }
-            indicatorsContainer2.addView(indicators[i])
-        }
-    }
-    private fun setCurrentIndicator(index: Int){
-        val childCount = indicatorsContainer2.childCount
-        for (i in 0 until  childCount){
-            val imageView = indicatorsContainer2.get(i) as ImageView
-            if (i == index){
-                imageView.setImageDrawable(ContextCompat.getDrawable(
-                    applicationContext, R.drawable.indicator_active
-                ))
-            }else {
-                imageView.setImageDrawable(ContextCompat.getDrawable(
-                    applicationContext, R.drawable.indicator_inactive
-                ))
-            }
-        }
-    }
-
- */
 
     private fun traer_slider(){
         //se consulta el servicio
@@ -245,53 +208,47 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         var data_utf8 = convertir_utd8();
 
         val data_categpry = JSONObject(data.getJSONObject(0).toString())
-        Log.i("error",data_categpry.toString())
- /*       val introSliderAdapter = SliderHomeAdapter(
+        Log.i("error",data_categpry["Imagen"].toString())
+        val introSliderAdapter = SliderHomeAdapter(
             listOf(
                 IntroSlide(
                     "Imagen Slider 1",
                     "Descripción de la primera imagen como Slider",
-                    data_categpry["imagen"].toString()
+                    data_categpry["Imagen"].toString()
                 ),
                 IntroSlide(
                     "Imagen Slider 2",
                     "Descripción de la primera imagen como Slider",
-                    data_categpry["imagen"].toString()
+                    data_categpry["Imagen"].toString()
                 ),
                 IntroSlide(
                     "Imagen Slider 3",
                     "Descripción de la primera imagen como Slider",
-                    data_categpry["imagen"].toString()
+                    data_categpry["Imagen"].toString()
                 ),
                 IntroSlide(
                     "Imagen Slider 4",
                     "Descripción de la cuarta imagen como Slider",
-                    data_categpry["imagen"].toString()
+                    data_categpry["Imagen"].toString()
                 )
             )
 
         )
 
-
-
-
-
         // Config Slider Home
         introSliderViewPager2.adapter = introSliderAdapter
-       // setupIndicators()
-       // setCurrentIndicator(0)
+        // setupIndicators()
+        // setCurrentIndicator(0)
         introSliderViewPager2.registerOnPageChangeCallback(object:
             ViewPager2.OnPageChangeCallback() {
 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-             //   setCurrentIndicator(position)
+                //   setCurrentIndicator(position)
             }
 
-        }
-        )
+        })
 
-  */
 
     }
 

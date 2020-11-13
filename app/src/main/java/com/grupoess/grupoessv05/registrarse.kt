@@ -29,11 +29,11 @@ class registrarse : AppCompatActivity() {
         id_registrate_boton.setOnClickListener {
 
             if(id_registrate_clave.length() < 7){
-                //valicacion
+                //validacion
                 v_alertas.mensaje("Alerta","La clave debe tener mínimo 7 caracteres","Aceptar",this)
             }
             else if(id_registrate_clave.text.toString() != id_registrate_clave2.text.toString()){
-                //valicacion
+                //validacion
                 v_alertas.mensaje("Alerta","Las claves no coinciden","Aceptar",this)
             }
             else if(id_registrate_clave.text.toString() == "" || id_registrate_correo.text.toString() == "" ){
@@ -69,12 +69,14 @@ class registrarse : AppCompatActivity() {
                 queue.add(postRequest)
             }
         }
-
+/*
         //se escucha el evento click del boton cancelar
         id_registrate_ingresar.setOnClickListener {
             val i = Intent(this, login::class.java)
             startActivity(i)
         }
+
+ */
     }
 
     private fun comprobar_respuesta(response: String) {

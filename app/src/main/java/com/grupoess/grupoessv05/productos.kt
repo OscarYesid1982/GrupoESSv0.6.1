@@ -26,7 +26,15 @@ import com.grupoess.grupoessv05.variables.Seleccion
 import com.grupoess.grupoessv05.adapters.LanguageAdaptersProductos
 import com.grupoess.grupoessv05.seleccion_producto
 import com.grupoess.grupoessv05.variables.convertir_utd8
+import com.grupoess.grupoessv05.variables.user
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.idFabFacebook
+import kotlinx.android.synthetic.main.activity_main.idFabGrupoEss
+import kotlinx.android.synthetic.main.activity_main.idFabInstagram
+import kotlinx.android.synthetic.main.activity_main.idFabTwitter
+import kotlinx.android.synthetic.main.activity_main.idFabYoutube
+import kotlinx.android.synthetic.main.activity_main.textUsuario
+import kotlinx.android.synthetic.main.productos.*
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -40,7 +48,11 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.productos)
-//        setSupportActionBar(findViewById(R.id.toolbar))
+
+        var nameUsuario = user()
+        nameUsuario.get_nombre()
+        textUsuarioProductos.text = nameUsuario.get_nombre()
+
       //Acciones Grupo Fab
         idFabYoutube.setOnClickListener {
             val uri: Uri = Uri.parse("https://www.youtube.com/channel/UCm7n7YmVPjRRgM51IUJIuRg")
@@ -127,25 +139,29 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.Search -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.Favorite -> {
-                Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
-                return true
-            }
+            /* R.id.Search -> {
+                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                 return true
+             }
+
+
+             R.id.Favorite -> {
+                 Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
+                 return true
+             }
+
+             */
             R.id.Car -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, carrito::class.java)
+                startActivityForResult(intent, 0)
             }
             R.id.MyProfile -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, registrarse::class.java)
+                startActivityForResult(intent, 0)
             }
             R.id.About -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivityForResult(intent, 0)
             }
         }
         return super.onOptionsItemSelected(item)

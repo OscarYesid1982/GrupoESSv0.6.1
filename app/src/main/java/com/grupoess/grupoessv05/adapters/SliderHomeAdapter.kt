@@ -1,5 +1,7 @@
 package com.grupoess.grupoessv05.adapters
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +41,11 @@ class SliderHomeAdapter (private val introSlides: List<IntroSlide>):
                // textTittle.text = introSlide.tittle
                // textDescription.text = introSlide.description
                // imageIcon.setImageResource(introSlide.icon)
-                Picasso.get().load(introSlide.icon).into(imageIcon)
+               // Picasso.get().load(introSlide.icon).into(imageIcon)
+
+                val base64Image: String = introSlide.icon.split(",").get(1)
+                val imageAsBytes = Base64.decode(base64Image.toByteArray(), Base64.DEFAULT)
+                imageIcon.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes,0,imageAsBytes.size))
             }
         }
 }

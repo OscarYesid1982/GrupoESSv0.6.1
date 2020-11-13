@@ -19,12 +19,11 @@
         <activity android:name=".crear_categoria" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/app_name"></activity>
         <activity android:name=".productos" />
         <activity
-            android:name=".carrito"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".carrito">
+        </activity>
         <activity android:name=".seleccion_producto" />
         <activity
             android:name=".login"

@@ -20,6 +20,7 @@ import com.grupoess.grupoessv05.variables.Seleccion
 import com.grupoess.grupoessv05.variables.convertir_utd8
 import com.grupoess.grupoessv05.variables.user
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.productos.*
 import kotlinx.android.synthetic.main.seleccion_producto.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -30,6 +31,10 @@ class seleccion_producto : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.seleccion_producto)
+
+        var nameUsuario = user()
+        nameUsuario.get_nombre()
+        textUsuarioSeleccionProducto.text = nameUsuario.get_nombre()
 
         var cat = Seleccion();
         traer_producto_seleccionado(cat.get_id_producto())
@@ -93,25 +98,29 @@ class seleccion_producto : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.Search -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.Favorite -> {
-                Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
-                return true
-            }
+            /* R.id.Search -> {
+                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                 return true
+             }
+
+
+             R.id.Favorite -> {
+                 Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
+                 return true
+             }
+
+             */
             R.id.Car -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, carrito::class.java)
+                startActivityForResult(intent, 0)
             }
             R.id.MyProfile -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, registrarse::class.java)
+                startActivityForResult(intent, 0)
             }
             R.id.About -> {
-                Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
-                return true
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivityForResult(intent, 0)
             }
         }
         return super.onOptionsItemSelected(item)

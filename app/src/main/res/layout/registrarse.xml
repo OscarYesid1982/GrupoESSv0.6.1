@@ -1,101 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".registrarse">
 
+
+    <TextView
+        android:id="@+id/textIngreseNombreRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingrese su nombre:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="20dp" />
+
     <EditText
         android:id="@+id/id_registrate_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/textIngreseNombreRegistrarse"
         android:ems="10"
-        android:hint="Nombre"
+
         android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032"
-        tools:ignore="MissingConstraints" />
+        android:textAlignment="textStart" />
+
+    <TextView
+        android:id="@+id/textIngreseApellidoRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_registrate_nombre"
+        android:text="Ingrese su apellido:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
 
     <EditText
         android:id="@+id/id_registrate_apellidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/textIngreseApellidoRegistrarse"
         android:ems="10"
-        android:hint="Apellidos"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_nombre"
-        tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/id_registrate_telefono"
+        android:inputType="textPersonName"
+        android:textAlignment="textStart" />
+
+    <TextView
+        android:id="@+id/textIngreseDireccionRegistrarse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Telefono"
-        android:inputType="phone"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_direccion"
-        tools:ignore="MissingConstraints" />
+        android:layout_below="@id/id_registrate_apellidos"
+        android:text="Ingrese su dirección ubicación:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
 
     <EditText
         android:id="@+id/id_registrate_direccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/textIngreseDireccionRegistrarse"
         android:ems="10"
-        android:hint="Direccion"
+
         android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_apellidos"
-        tools:ignore="MissingConstraints" />
+        android:textAlignment="textStart"/>
+
+    <TextView
+        android:id="@+id/textIngreseTelefonoRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_registrate_direccion"
+        android:text="Ingrese número movil o fijo:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/id_registrate_telefono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/textIngreseTelefonoRegistrarse"
+        android:ems="10"
+        android:inputType="phone"
+        android:textAlignment="textStart"/>
+
+    <TextView
+        android:id="@+id/textIngreseCorreoRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_registrate_telefono"
+        android:text="Ingrese dirección E-mail:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
 
     <EditText
         android:id="@+id/id_registrate_correo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/textIngreseCorreoRegistrarse"
         android:ems="10"
-        android:hint="Correo"
         android:inputType="textEmailAddress"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_telefono" />
+        android:textAlignment="textStart"/>
+
+    <TextView
+        android:id="@+id/textIngreseContrasenaRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_registrate_correo"
+        android:text="Ingrese contraseña:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
+
+    <EditText
+        android:id="@+id/id_registrate_clave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/textIngreseContrasenaRegistrarse"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textAlignment="textStart"/>
+
+    <TextView
+        android:id="@+id/textIngreseConfirmaContrasenaRegistrarse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id_registrate_clave"
+        android:text="Repita contraseña:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp" />
 
     <EditText
         android:id="@+id/id_registrate_clave2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@id/textIngreseConfirmaContrasenaRegistrarse"
         android:ems="10"
-        android:hint="Repetir Clave"
         android:inputType="textPassword"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_clave" />
+        android:textAlignment="textStart"/>
 
+    <Button
+        android:id="@+id/id_registrate_boton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_registrate_clave2"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="130dp"
+        android:background="#4F6082"
+        android:text="Registrar"
+        android:textColor="#FFFFFF"/>
+
+    <!--
     <TextView
         android:id="@+id/id_registrate_ingresar"
         android:layout_width="wrap_content"
@@ -103,37 +178,8 @@
         android:layout_marginTop="16dp"
         android:text="Ingresar"
         android:textColor="#4F6082"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_boton" />
+        />
+    -->
 
-    <Button
-        android:id="@+id/id_registrate_boton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:background="#4F6082"
-        android:padding="15dp"
-        android:text="Registrar"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_clave2" />
 
-    <EditText
-        android:id="@+id/id_registrate_clave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Clave"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_registrate_correo" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

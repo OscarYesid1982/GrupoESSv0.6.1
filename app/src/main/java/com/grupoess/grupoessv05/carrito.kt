@@ -3,6 +3,8 @@ package com.grupoess.grupoessv05
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.GridView
@@ -156,6 +158,44 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
             }
         }
         queue.add(postRequest)
+    }
+
+    //Opciones Menu
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            /* R.id.Search -> {
+                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
+                 return true
+             }
+
+
+             R.id.Favorite -> {
+                 Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
+                 return true
+             }
+
+             */
+            R.id.Car -> {
+                val intent = Intent(this, carrito::class.java)
+                startActivityForResult(intent, 0)
+            }
+            R.id.MyProfile -> {
+                val intent = Intent(this, registrarse::class.java)
+                startActivityForResult(intent, 0)
+            }
+            R.id.About -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivityForResult(intent, 0)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

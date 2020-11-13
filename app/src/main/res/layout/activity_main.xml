@@ -13,13 +13,6 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -50,8 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
+
             android:text="Usuario"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:textStyle="italic" />
 
     </LinearLayout>
 
@@ -65,6 +60,16 @@
         <include layout="@layout/sliderhome" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tituloCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nuestras Categorias"
+        android:textSize="16dp"
+        android:layout_below="@+id/linearSplashHome"
+        android:gravity="center"
+        android:textStyle="bold"/>
 
 <!--
     <androidx.viewpager2.widget.ViewPager2
@@ -80,7 +85,7 @@
 
     <LinearLayout
         android:id="@+id/linear2"
-        android:layout_below="@+id/linearSplashHome"
+        android:layout_below="@+id/tituloCategorias"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
