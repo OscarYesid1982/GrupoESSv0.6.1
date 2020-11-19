@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
     <GridView
-        android:id="@+id/grid_view_contet_main"
+        android:id="@+id/grid_view_contet_main2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:columnWidth="150dp"
         android:horizontalSpacing="15dp"
         android:padding="6dp"
         android:numColumns="auto_fit"
-        android:verticalSpacing="15dp"
-        />
+        android:verticalSpacing="15dp"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

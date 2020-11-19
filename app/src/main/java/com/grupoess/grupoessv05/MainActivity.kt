@@ -1,5 +1,6 @@
 package com.grupoess.grupoessv05
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,21 +8,17 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.GridView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.grupoess.grupoessv05.adapters.LanguageAdaptersCategorias
+import com.grupoess.grupoessv05.adapters.LanguageAdaptersCategorias2
 import com.grupoess.grupoessv05.adapters.SliderHomeAdapter
 import com.grupoess.grupoessv05.model.Categorias_object
 import com.grupoess.grupoessv05.model.IntroSlide
@@ -29,59 +26,41 @@ import com.grupoess.grupoessv05.variables.Seleccion
 import com.grupoess.grupoessv05.variables.convertir_utd8
 import com.grupoess.grupoessv05.variables.user
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.sliderhome.*
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.Map
+import kotlin.collections.MutableMap
+import kotlin.collections.listOf
+import kotlin.collections.set
 
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     private var arrayList:ArrayList<Categorias_object> ? = null
     private var gridView:GridView ? = null
+    private var gridView2:GridView ? = null
     private var languageAdapters: LanguageAdaptersCategorias? = null
+    private var languageAdapters2: LanguageAdaptersCategorias2? = null
 
 
-
+      @SuppressLint("WrongConstant")
       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //setSupportActionBar(findViewById(R.id.toolbar))
+
           traer_slider()
 
        var nameUsuario = user()
        nameUsuario.get_nombre()
        textUsuario.text = nameUsuario.get_nombre()
 
-       //Acciones Grupo Fab
-        idFabYoutube.setOnClickListener {
-            val uri: Uri = Uri.parse("https://www.youtube.com/channel/UCm7n7YmVPjRRgM51IUJIuRg")
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(intent)
-        }
-       idFabFacebook.setOnClickListener {
-           val uri: Uri = Uri.parse("https://www.facebook.com/GrupoESSCol/")
-           val intent = Intent(Intent.ACTION_VIEW, uri)
-           startActivity(intent)
-       }
+      //Carga Fab
+      grupoFab()
 
-       idFabInstagram.setOnClickListener {
-           val uri: Uri = Uri.parse("https://www.instagram.com/grupoess/")
-           val intent = Intent(Intent.ACTION_VIEW, uri)
-           startActivity(intent)
-       }
-
-       idFabTwitter.setOnClickListener {
-           val uri: Uri = Uri.parse("https://twitter.com/ess_grupo")
-           val intent = Intent(Intent.ACTION_VIEW, uri)
-           startActivity(intent)
-       }
-
-       idFabGrupoEss.setOnClickListener {
-           val uri: Uri = Uri.parse("https://grupoess.com/tienda/")
-           val intent = Intent(Intent.ACTION_VIEW, uri)
-           startActivity(intent)
-       }
        //se traen las caegorias
        traer_categorias()
    }
@@ -96,7 +75,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 covertir_json(response)
             },
             Response.ErrorListener { // error
-                Log.i("Alerta","Error al intentar cargar las variables contacte con el administrador")
+                Log.i(
+                    "Alerta",
+                    "Error al intentar cargar las variables contacte con el administrador"
+                )
             }
         ) {
             override fun getParams(): Map<String, String> {
@@ -124,9 +106,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         //se toma el grid_view_contet_main
         arrayList = data_arraylist;
         gridView = findViewById(R.id.grid_view_contet_main)
+        gridView2 = findViewById(R.id.grid_view_contet_main2)
+
         languageAdapters = LanguageAdaptersCategorias(applicationContext, data_arraylist!!)
+        languageAdapters2 = LanguageAdaptersCategorias2(applicationContext, data_arraylist!!)
         gridView?.adapter = languageAdapters
+        gridView2?.adapter = languageAdapters2
         gridView?.onItemClickListener = this
+        gridView2?.onItemClickListener = this
 
     }
 
@@ -189,7 +176,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 covertir_jsonSlider(response)
             },
             Response.ErrorListener { // error
-                Log.i("Alerta","Error al intentar cargar las variables contacte con el administrador")
+                Log.i(
+                    "Alerta",
+                    "Error al intentar cargar las variables contacte con el administrador"
+                )
             }
         ) {
             override fun getParams(): Map<String, String> {
@@ -202,38 +192,32 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     private fun covertir_jsonSlider(response: String?) {
-
         val data_ini = JSONObject(response)
         val data = JSONArray(data_ini["data"].toString())
-        var data_utf8 = convertir_utd8();
+        var data_categpry = JSONObject(data.getJSONObject(0).toString())
+        var list = mutableListOf(
+            IntroSlide(
+                "Imagen Slider 1",
+                "Descripción de la primera imagen como Slider",
+                data_categpry["Imagen"].toString()
+            )
+        );
 
-        val data_categpry = JSONObject(data.getJSONObject(0).toString())
-        Log.i("error",data_categpry["Imagen"].toString())
-        val introSliderAdapter = SliderHomeAdapter(
-            listOf(
-                IntroSlide(
-                    "Imagen Slider 1",
-                    "Descripción de la primera imagen como Slider",
-                    data_categpry["Imagen"].toString()
-                ),
-                IntroSlide(
-                    "Imagen Slider 2",
-                    "Descripción de la primera imagen como Slider",
-                    data_categpry["Imagen"].toString()
-                ),
-                IntroSlide(
-                    "Imagen Slider 3",
-                    "Descripción de la primera imagen como Slider",
-                    data_categpry["Imagen"].toString()
-                ),
-                IntroSlide(
-                    "Imagen Slider 4",
-                    "Descripción de la cuarta imagen como Slider",
-                    data_categpry["Imagen"].toString()
+        for (i in 1 until data.length()) {
+            data_categpry = JSONObject(data.getJSONObject(i).toString())
+
+            list.addAll(
+                listOf(
+                    IntroSlide(
+                        "Imagen Slider 1",
+                        "Descripción de la primera imagen como Slider",
+                        data_categpry["Imagen"].toString()
+                    )
                 )
             )
+        }
 
-        )
+        val introSliderAdapter = SliderHomeAdapter(list)
 
         // Config Slider Home
         introSliderViewPager2.adapter = introSliderAdapter
@@ -246,10 +230,47 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 super.onPageSelected(position)
                 //   setCurrentIndicator(position)
             }
-
         })
 
 
+    }
+
+    fun grupoFab(){
+        //Acciones Grupo Fab
+        idFabYoutube.setOnClickListener {
+            val uri: Uri = Uri.parse("https://www.youtube.com/channel/UCm7n7YmVPjRRgM51IUJIuRg")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+        idFabFacebook.setOnClickListener {
+            val uri: Uri = Uri.parse("https://www.facebook.com/GrupoESSCol/")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+
+        idFabInstagram.setOnClickListener {
+            val uri: Uri = Uri.parse("https://www.instagram.com/grupoess/")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+
+        idFabTwitter.setOnClickListener {
+            val uri: Uri = Uri.parse("https://twitter.com/ess_grupo")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+
+        idFabGrupoEss.setOnClickListener {
+            val uri: Uri = Uri.parse("https://grupoess.com/tienda/")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
+
+        idFabWP.setOnClickListener {
+            Toast.makeText(this, "Conexion WP", Toast.LENGTH_SHORT).show()
+            val launchIntent = packageManager.getLaunchIntentForPackage("com.whatsapp")
+            startActivity(launchIntent)
+        }
     }
 
 

@@ -116,7 +116,7 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
             val data_product = JSONObject(data.getJSONObject(i).toString())
 
             if(cat.get_id_categoria() == 42){
-                data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(), data_product["id_categoria"].toString().toInt(), data_product["imagen"].toString(), data_utf8.get_text(data_product["name"].toString()), data_utf8.get_text(data_product["descripcion"].toString()),0 ))
+                data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(), data_product["id_categoria"].toString().toInt(), data_utf8.get_text(data_product["imagen"].toString()), data_utf8.get_text(data_product["name"].toString()), data_utf8.get_text(data_product["descripcion"].toString()),0 ))
             }
         }
 

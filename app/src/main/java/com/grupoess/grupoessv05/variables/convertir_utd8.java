@@ -6,6 +6,8 @@ public class convertir_utd8 {
         texto = texto.replace("Ã³","ó");
         texto = texto.replace("Ã©","é");
         texto = texto.replace("Ã“","ó");
+        texto = texto.replace("Ã±","ñ");
+        texto = texto.replace("&#8211;","-");
 
         return texto;
     }

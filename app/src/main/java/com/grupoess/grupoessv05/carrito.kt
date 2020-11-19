@@ -1,6 +1,7 @@
 package com.grupoess.grupoessv05
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -34,18 +35,12 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.carrito_activity)
 
-        var nameUsuarioCarrito = user()
-        nameUsuarioCarrito.get_nombre()
-        textUsuarioCarrito.text = nameUsuarioCarrito.get_nombre()
-        var telefonoUsuarioCarrito = user()
-        telefonoUsuarioCarrito.get_telefono()
-        textTelefonoCarrito.text = telefonoUsuarioCarrito.get_telefono()
-        var direccionUsuarioCarrito = user()
-        direccionUsuarioCarrito.get_direccion()
-        textDireccionCarrito.text = direccionUsuarioCarrito.get_direccion()
-        var apellidoUsuarioCarrito = user()
-        apellidoUsuarioCarrito.get_apellido()
-        textApellidoUsuarioCarrito.text = apellidoUsuarioCarrito.get_apellido()
+        var data_user = user()
+
+        textUsuarioCarrito.text = data_user.get_nombre()
+        textTelefonoCarrito.text = data_user.get_telefono()
+        textDireccionCarrito.text = data_user.get_direccion()
+        textApellidoUsuarioCarrito.text = data_user.get_apellido()
 
 
         var user_data = user();
@@ -56,6 +51,12 @@ class carrito : AppCompatActivity(), AdapterView.OnItemClickListener {
         }
         else{
             traer_productos()
+        }
+
+        completar_compra.setOnClickListener {
+            val uri: Uri = Uri.parse("https://kindrez.com:83/pago.php?id="+data_user.get_id())
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
         }
     }
 

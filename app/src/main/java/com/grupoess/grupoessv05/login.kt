@@ -10,6 +10,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.grupoess.grupoessv05.variables.Seleccion
 import com.grupoess.grupoessv05.variables.user
 import kotlinx.android.synthetic.main.login.*
 import org.json.JSONArray
@@ -28,6 +29,13 @@ class login : AppCompatActivity() {
             startActivity(i)
         }
         else{
+            var validar_pesta = Seleccion();
+            if(validar_pesta.get_id_validar_pestana()){
+                val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
+                validar_pesta.set_id_validar_pestana(false);
+                return;
+            }
             //accion de cuando le dan el click sobre el boton de logueo
             id_login_boton.setOnClickListener {
                 validar_login()
