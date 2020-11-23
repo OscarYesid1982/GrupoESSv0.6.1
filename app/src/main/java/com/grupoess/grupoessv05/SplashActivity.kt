@@ -152,6 +152,7 @@ class SplashActivity : AppCompatActivity() {
             )
         }
 
+
         val introSliderAdapter = IntroSliderAdapter(list)
 
         // Config Slider Home
