@@ -52,17 +52,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         setContentView(R.layout.activity_main)
         //setSupportActionBar(findViewById(R.id.toolbar))
 
+    //Carga Slider
           traer_slider()
-
-       var nameUsuario = user()
-       nameUsuario.get_nombre()
-       textUsuario.text = nameUsuario.get_nombre()
-
-      //Carga Fab
-      grupoFab()
-
-       //se traen las caegorias
-       traer_categorias()
+    //Carga nombre Usuario al saludo
+          datoUsuario()
+    //Carga Fab
+          grupoFab()
+    //Se traen las caegorias
+          traer_categorias()
    }
 
     private fun traer_categorias(){
@@ -271,6 +268,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             val launchIntent = packageManager.getLaunchIntentForPackage("com.whatsapp")
             startActivity(launchIntent)
         }
+    }
+
+    fun datoUsuario(){
+        var nameUsuario = user()
+        nameUsuario.get_nombre()
+        textUsuario.text = nameUsuario.get_nombre()
+
     }
 
 

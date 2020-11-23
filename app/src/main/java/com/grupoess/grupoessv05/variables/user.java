@@ -9,7 +9,8 @@ public class user {
     private static String correo;
     private static String fecha_ultimo_ingreso;
 
-    public void set_user(String v_id, String v_nonbre, String v_apellido, String v_direccion, String v_telefono, String v_correo, String v_fecha_ultimo_ingreso){
+    public void set_user(String v_id, String v_nonbre, String v_apellido, String v_direccion, String v_telefono,
+                         String v_correo, String v_fecha_ultimo_ingreso){
         id = v_id;
         nombre = v_nonbre;
         apellido = v_apellido;

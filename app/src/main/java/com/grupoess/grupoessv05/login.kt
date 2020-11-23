@@ -102,7 +102,9 @@ class login : AppCompatActivity() {
             var user = user()
             val i = Intent(this, MainActivity::class.java)
 
-            user.set_user( data_temp["id"].toString(), data_temp["nombre"].toString(), data_temp["apellido"].toString(), data_temp["direccion"].toString(), data_temp["telefono"].toString(), data_temp["correo"].toString(), data_temp["fecha_ultimo_ingreso"].toString())
+            user.set_user( data_temp["id"].toString(), data_temp["nombre"].toString(),
+                data_temp["apellido"].toString(), data_temp["direccion"].toString(),
+                data_temp["telefono"].toString(), data_temp["correo"].toString(), data_temp["fecha_ultimo_ingreso"].toString())
             startActivity(i)
         }
 
