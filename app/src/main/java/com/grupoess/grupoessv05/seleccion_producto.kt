@@ -42,9 +42,7 @@ class seleccion_producto : AppCompatActivity() {
 
         seleccion_producto_id_compra.setOnClickListener {
             //se lee el usuario en cache
-
             var user_data = user();
-
             if(user_data.get_id() == "null"){
                 val intent = Intent(this, login::class.java)
                 startActivityForResult(intent, 0)
@@ -160,7 +158,8 @@ class seleccion_producto : AppCompatActivity() {
 
             seleccion_producto_id_titulo.text = data_utf8.get_text( data_product["name"].toString() )
             seleccion_producto_id_descripcion.text = data_utf8.get_text( data_product["descripcion"].toString() )
-            Picasso.get().load( data_product["imagen"].toString() ).into(seleccion_producto_id_imagen);
+            Picasso.get().load( data_product["imagen"].toString() ).into(seleccion_producto_id_imagen)
+            seleccion_producto_valor_Producto.text = data_utf8.get_text("$ " + data_product["precio"].toString())
         }
 
     }

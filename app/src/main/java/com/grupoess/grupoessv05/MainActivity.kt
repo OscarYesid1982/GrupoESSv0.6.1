@@ -96,7 +96,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         for (i in 0 until data.length()) {
             val data_categpry = JSONObject(data.getJSONObject(i).toString())
             if(data_categpry["parent"].toString() == "38"){
-                data_arraylist.add(Categorias_object( data_categpry["img"].toString(),  data_utf8.get_text(data_categpry["name"].toString()), data_categpry["id_wordpress"].toString().toInt()))
+                data_arraylist.add(Categorias_object( data_categpry["img"].toString(),
+                    data_utf8.get_text(data_categpry["name"].toString()), data_categpry["id_wordpress"].toString().toInt()))
             }
         }
 
@@ -114,6 +115,17 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     }
 
+    //Actividades categorias
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        var items: Categorias_object = arrayList!!.get(position)
+        var cat = Seleccion();
+        cat.set_id_categoria(items.id!!)
+
+        val intent = Intent(this, productos::class.java)
+        startActivityForResult(intent, 0)
+    }
+
+
     //Opciones Menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
@@ -128,13 +140,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 Toast.makeText(this, "Mensaje para compartir", Toast.LENGTH_SHORT).show()
                 return true
             }
-
-
             R.id.Favorite -> {
                 Toast.makeText(this, "Mensaje para favoritos", Toast.LENGTH_SHORT).show()
                 return true
             }
-
             */
             R.id.Car -> {
                 val intent = Intent(this, carrito::class.java)
@@ -152,16 +161,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         return super.onOptionsItemSelected(item)
     }
 
-
-    //Actividades categorias
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        var items: Categorias_object = arrayList!!.get(position)
-        var cat = Seleccion();
-        cat.set_id_categoria(items.id!!)
-
-        val intent = Intent(this, productos::class.java)
-        startActivityForResult(intent, 0)
-    }
 
     private fun traer_slider(){
         //se consulta el servicio

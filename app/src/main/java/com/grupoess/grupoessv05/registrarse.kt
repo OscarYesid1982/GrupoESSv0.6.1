@@ -18,15 +18,12 @@ class registrarse : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.registrarse)
 
-        //se llama la funcion para la conxion a FireBase
-        val mAuth: FirebaseAuth
-        mAuth = FirebaseAuth.getInstance()
-
         //se llama la clase que contiene las alertas
         var v_alertas = alertas();
 
         //se escucha el evento click del boton registrar
-        id_registrate_boton.setOnClickListener {
+        id_registrarse_boton.setOnClickListener {
+            Toast.makeText(this,"prueba boton registrarse",Toast.LENGTH_SHORT).show()
 
             if(id_registrate_clave.length() < 7){
                 //validacion
@@ -82,7 +79,7 @@ class registrarse : AppCompatActivity() {
     private fun comprobar_respuesta(response: String) {
         val respuesta = JSONObject(response);
         val i = Intent(this, login::class.java)
-
+        Toast.makeText(this,"Mensaje de entrada",Toast.LENGTH_SHORT).show()
         Toast.makeText(this, respuesta["mensaje"].toString(), Toast.LENGTH_SHORT).show()
         startActivity(i)
     }

@@ -116,7 +116,10 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
             val data_product = JSONObject(data.getJSONObject(i).toString())
 
             if(cat.get_id_categoria() == 42){
-                data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(), data_product["id_categoria"].toString().toInt(), data_utf8.get_text(data_product["imagen"].toString()), data_utf8.get_text(data_product["name"].toString()), data_utf8.get_text(data_product["descripcion"].toString()),0 ))
+                data_arraylist.add(Productos_object(data_product["id_wordpress"].toString().toInt(),
+                    data_product["id_categoria"].toString().toInt(), data_utf8.get_text(data_product["imagen"].toString()),
+                    data_utf8.get_text(data_product["name"].toString()),
+                    data_utf8.get_text(data_product["descripcion"].toString()),0 ))
             }
         }
 
@@ -127,6 +130,15 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
         gridView?.adapter = languageAdapters
         gridView?.onItemClickListener = this
 
+    }
+
+    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        var items: Productos_object = arrayList!!.get(position)
+        var cat = Seleccion();
+        cat.set_id_producto(items.id!!)
+
+        val intent = Intent(this, seleccion_producto::class.java)
+        startActivityForResult(intent, 0)
     }
 
     //Opciones Menu
@@ -167,12 +179,5 @@ class productos : AppCompatActivity(), AdapterView.OnItemClickListener {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        var items: Productos_object = arrayList!!.get(position)
-        var cat = Seleccion();
-        cat.set_id_producto(items.id!!)
 
-        val intent = Intent(this, seleccion_producto::class.java)
-        startActivityForResult(intent, 0)
-    }
 }

@@ -39,12 +39,14 @@ class login : AppCompatActivity() {
             //accion de cuando le dan el click sobre el boton de logueo
             id_login_boton.setOnClickListener {
                 validar_login()
+                Toast.makeText(this, "Prueba Ingresar",Toast.LENGTH_SHORT).show()
             }
 
             //escucha el boton de registrarse
             id_login_registrar.setOnClickListener {
                 val i = Intent(this, registrarse::class.java)
                 startActivity(i)
+                Toast.makeText(this, "Prueba boton",Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -76,7 +78,6 @@ class login : AppCompatActivity() {
 
     private fun comprobar_respuesta(response: String) {
         val respuesta = JSONObject(response);
-
         if(respuesta["mensaje"].toString() == "1"){
             var info = JSONArray(respuesta["data"].toString())
             guardar_data(info[0].toString())
@@ -101,6 +102,7 @@ class login : AppCompatActivity() {
             var data_temp = JSONObject( valor )
             var user = user()
             val i = Intent(this, MainActivity::class.java)
+
 
             user.set_user( data_temp["id"].toString(), data_temp["nombre"].toString(),
                 data_temp["apellido"].toString(), data_temp["direccion"].toString(),

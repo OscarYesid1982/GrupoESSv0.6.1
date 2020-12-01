@@ -21,7 +21,7 @@
             android:layout_width="28dp"
             android:layout_height="44dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/perfil_usuario" />
+            android:src="@drawable/ic_perfil" />
 
         <TextView
             android:id="@+id/textSaludoUsuario"
@@ -84,7 +84,7 @@
                 "@+id/seleccion_producto_id_descripcion" />
 
     <TextView
-        android:id="@+id/seleccion_cantidad"
+        android:id="@+id/seleccion_producto_valor_Producto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
